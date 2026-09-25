@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FitBuddy AI - Your Plan</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light p-4">
+    <div class="container">
+        <a href="/" class="btn btn-outline-secondary mb-3">&larr; Back to Home</a>
+        
+        {% if message %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+
+        <div class="card mb-4 border-primary">
+            <div class="card-header bg-primary text-white">
+                <h4>Welcome, {{ user.name }}!</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Goal:</strong> {{ user.fitness_goal }} | <strong>Intensity:</strong> {{ user.intensity }} | <strong>Age:</strong> {{ user.age }} | <strong>Weight:</strong> {{ user.weight }} kg</p>
+            </div>
+        </div>
+
+        <div class="card mb-4 border-success">
+            <div class="card-header bg-success text-white">🥗 AI Nutrition & Recovery Tip</div>
+            <div class="card-body">
+                <p style="white-space: pre-wrap;">{{ plan.nutrition_tip }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">🏋️ 7-Day Customized Workout Schedule</div>
+            <div class="card-body">
+                <pre style="white-space: pre-wrap; font-family: inherit;">{{ plan.plan_content }}</pre>
+            </div>
+        </div>
+
+        <div class="card border-info mb-5">
+            <div class="card-header bg-info text-white">🔄 Need Modifications? Refine Your Plan</div>
+            <div class="card-body">
+                <form action="/update_plan/{{ plan.id }}" method="post">
+                    <div class="mb-3">
+                        <label>Tell AI what to change (e.g., "Add more cardio"):</label>
+                        <textarea name="feedback" class="form-control" rows="3" required placeholder="Type your feedback here..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-info text-white">Update Workout Plan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
